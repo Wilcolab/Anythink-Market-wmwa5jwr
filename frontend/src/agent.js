@@ -63,7 +63,13 @@ const Items = {
   favoritedBy: (seller, page) =>
     requests.get(`/items?favorited=${encode(seller)}&${limit(500, page)}`),
   feed: () => requests.get("/items/feed?limit=10&offset=0"),
-  get: (slug) => requests.get(`/items/${slug}`),
+  get: async (slug) => {
+    const thing = await requests.get(`/items/${slug}`)
+    if(thing.item.image === ""){
+      thing.item.image = "https://i0.wp.com/theperfectroundgolf.com/wp-content/uploads/2022/04/placeholder.png?fit=1200%2C800&ssl=1";
+    }
+    return thing;
+  },
   unfavorite: (slug) => requests.del(`/items/${slug}/favorite`),
   update: (item) =>
     requests.put(`/items/${item.slug}`, { item: omitSlug(item) }),
