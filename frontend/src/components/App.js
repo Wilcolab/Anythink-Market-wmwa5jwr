@@ -12,8 +12,7 @@ import ProfileFavorites from "./ProfileFavorites";
 import Register from "./Register";
 import Settings from "./Settings";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ProtectedRoute from "./utils/ProtectedRoute";
-// import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 const mapStateToProps = (state) => {
   return {
