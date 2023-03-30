@@ -12,6 +12,8 @@ import ProfileFavorites from "./ProfileFavorites";
 import Register from "./Register";
 import Settings from "./Settings";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import ProtectedRoute from "./utils/ProtectedRoute";
+// import ProtectedRoute from "./utils/ProtectedRoute";
 
 const mapStateToProps = (state) => {
   return {
@@ -58,10 +60,16 @@ const App = (props) => {
           <Route exact path="/" element={<Home/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
-          <Route path="/editor/:slug" element={<Editor/>} />
-          <Route path="/editor" element={<Editor/>} />
+          <Route path="/editor" element={<ProtectedRoute token={window.localStorage.getItem("jwt")}>
+            <Editor/>
+          </ProtectedRoute>} />
+          <Route path="/editor/:slug" element={<ProtectedRoute token={window.localStorage.getItem("jwt")}>
+            <Editor/>
+          </ProtectedRoute>} />
           <Route path="/item/:id" element={<Item/>} />
-          <Route path="/settings" element={<Settings/>} />
+          <Route path="/settings" element={<ProtectedRoute token={window.localStorage.getItem("jwt")}>
+            <Settings/>
+          </ProtectedRoute>} />
           <Route path="/:username/favorites" element={<ProfileFavorites/>} />
           <Route path="/:username" element={<Profile/>} />
         </Routes>
