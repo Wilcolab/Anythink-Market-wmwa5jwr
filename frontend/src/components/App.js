@@ -12,7 +12,7 @@ import ProfileFavorites from "./ProfileFavorites";
 import Register from "./Register";
 import Settings from "./Settings";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const mapStateToProps = (state) => {
   return {
@@ -59,16 +59,16 @@ const App = (props) => {
           <Route exact path="/" element={<Home/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
-          <Route path="/editor" element={<ProtectedRoute token={window.localStorage.getItem("jwt")}>
+          <Route path="/editor" element={<PrivateRoute token={window.localStorage.getItem("jwt")}>
             <Editor/>
-          </ProtectedRoute>} />
-          <Route path="/editor/:slug" element={<ProtectedRoute token={window.localStorage.getItem("jwt")}>
+          </PrivateRoute>} />
+          <Route path="/editor/:slug" element={<PrivateRoute token={window.localStorage.getItem("jwt")}>
             <Editor/>
-          </ProtectedRoute>} />
+          </PrivateRoute>} />
           <Route path="/item/:id" element={<Item/>} />
-          <Route path="/settings" element={<ProtectedRoute token={window.localStorage.getItem("jwt")}>
+          <Route path="/settings" element={<PrivateRoute token={window.localStorage.getItem("jwt")}>
             <Settings/>
-          </ProtectedRoute>} />
+          </PrivateRoute>} />
           <Route path="/:username/favorites" element={<ProfileFavorites/>} />
           <Route path="/:username" element={<Profile/>} />
         </Routes>

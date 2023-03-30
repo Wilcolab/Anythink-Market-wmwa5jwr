@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom"
 
-const ProtectedRoute = ({token, children}) => {
+const PrivateRoute = ({token, children}) => {
   if(token !== "")
     return children;
   else
     return <Navigate to="/login" replace />
 }
 
-export default ProtectedRoute;
+export default PrivateRoute;
