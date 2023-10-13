@@ -57,8 +57,8 @@ const App = (props) => {
         />
         <Routes>
           <Route exact path="/" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/login" element={<PrivateRoute redirectTo="/login" ><Login/></PrivateRoute>} />
+          <Route path="/register" element={<PrivateRoute redirectTo="/register" ><Register/></PrivateRoute>} />
           <Route path="/editor/:slug" element={
               <PrivateRoute>
                 <Editor/>
@@ -74,9 +74,9 @@ const App = (props) => {
                 <Settings/>
               </PrivateRoute>
           } />
-          <Route path="/item/:id" element={<Item/>} />
-          <Route path="/:username/favorites" element={<ProfileFavorites/>} />
-          <Route path="/:username" element={<Profile/>} />
+          <Route path="/item/:id" element={<PrivateRoute><Item/></PrivateRoute>} />
+          <Route path="/:username/favorites" element={<PrivateRoute><ProfileFavorites/></PrivateRoute>} />
+          <Route path="/:username" element={<PrivateRoute><Profile/></PrivateRoute>} />
         </Routes>
       </div>
     );
