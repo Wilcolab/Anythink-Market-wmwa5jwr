@@ -12,6 +12,7 @@ import ProfileFavorites from "./ProfileFavorites";
 import Register from "./Register";
 import Settings from "./Settings";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 
 const mapStateToProps = (state) => {
   return {
@@ -58,10 +59,22 @@ const App = (props) => {
           <Route exact path="/" element={<Home/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
-          <Route path="/editor/:slug" element={<Editor/>} />
-          <Route path="/editor" element={<Editor/>} />
+          <Route path="/editor/:slug" element={
+              <PrivateRoute>
+                <Editor/>
+              </PrivateRoute>
+          } />
+          <Route path="/editor" element={
+              <PrivateRoute>
+                <Editor/>
+              </PrivateRoute>
+          } />
+          <Route path="/settings" element={
+              <PrivateRoute>
+                <Settings/>
+              </PrivateRoute>
+          } />
           <Route path="/item/:id" element={<Item/>} />
-          <Route path="/settings" element={<Settings/>} />
           <Route path="/:username/favorites" element={<ProfileFavorites/>} />
           <Route path="/:username" element={<Profile/>} />
         </Routes>
